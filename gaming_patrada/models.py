@@ -28,12 +28,12 @@ class Category(models.Model):
 
 class Games(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
-    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', blank=True, null=True)
+    category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', blank=False, null=False)
     name = models.CharField(max_length=50)
-    cover_photo = models.ImageField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    requirements = models.TextField(blank=True, null=True)
-    download = models.TextField(blank=True, null=True)
+    cover_photo = models.ImageField(blank=False, null=False)
+    description = models.TextField(blank=False, null=False)
+    requirements = models.TextField(blank=False, null=False)
+    download = models.TextField(blank=False, null=False)
     slug = models.SlugField()
     class Meta:
         verbose_name_plural = 'Games'
