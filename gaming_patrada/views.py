@@ -10,8 +10,8 @@ def takehome(response):
 
 
 def home(request):
-    games = Games.objects.all().order_by('?')[:9]
-    slideshow = Games.objects.all().order_by('?')[:3]
+    games = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:9]
+    slideshow = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:3]
     categories = Category.objects.all
     context = {'all_games': games, 'slideshow': slideshow, 'categories': categories}
 
@@ -29,8 +29,8 @@ def category(request, category_name_slug):
 
         category = Category.objects.get(slug=category_name_slug)
         context['category_name'] = category.name
-        games_list = Games.objects.filter(category=category).order_by('id')
-
+        games_list = Games.objects.filter(category=category).order_by('id').filter(id__range=[1,1000])
+        '''
         paginator = Paginator(games_list, 9)
         page = request.GET.get('page')
 
@@ -42,8 +42,9 @@ def category(request, category_name_slug):
         except EmptyPage:
             # If page is out of range (e.g. 9999), deliver last page of results.
             games = paginator.page(paginator.num_pages)
+            '''
 
-        context['games'] = games
+        context['games'] = games_list
         context['category'] = category
     except Category.DoesNotExist:
         pass
@@ -78,7 +79,8 @@ def all_games(request):
 
     # paginator starts here
     ''''''
-    allgames = Games.objects.all().order_by('name').exclude(category__id__exact=None)
+    allgames = Games.objects.all().order_by('id').filter(id__range=[1,1000])
+    '''
     paginator = Paginator(allgames, 8)
     page = request.GET.get('page')
 
@@ -90,8 +92,8 @@ def all_games(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         games = paginator.page(paginator.num_pages)
-
-    context['games'] = games
+    '''
+    context['games'] = allgames
     return render(request, template_name='gamingpatrada/games.html', context=context)
 
 

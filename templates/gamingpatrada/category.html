@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block page_content %}
-    {% paginate games %}{% get_pages %}
+    {% paginate games %}
     {% for game in games %}
             <div class="col-sm-6 col-lg-4 col-md-6">
                         <div class="thumbnail">
@@ -41,6 +41,7 @@
             </div>
         </div>
     <div class="row text-center"  style="color: #ffffff ;font-family: 'Blackadder ITC' ;font-size: 25px">
+    {% get_pages %}
         Page {{ pages.current_start_index }}-{{ pages.current_end_index }} of {{ pages.total_count }}
     </div>
 
