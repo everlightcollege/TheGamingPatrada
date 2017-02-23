@@ -1,0 +1,37 @@
+{% extends 'gamingpatrada/base.html' %}
+{% load staticfiles %}
+
+{% block title_block  %}Please Donate{% endblock %}
+{% block Category_block %}
+{% for category in categories %}
+        <a href="{% url 'category' category.slug %}" class="list-group-item">{{ category.name }}</a>
+
+{% endfor %}
+
+{%  endblock%}
+{% block page_content %}
+    <header class="jumbotron hero-spacer">
+            <h1>Hey There :)</h1>
+            <p>we don't place ads on this page because we know how much of a pain they can be
+            but all in all its takes cash to keep this site up and running so a little donation would be well received
+            and if i didn't convince you maybe this will :)</p>
+        <br/>
+            <img style="width: 700px;height:500px " src="{%static 'gaming_patrada/GIFS/begging-2.gif'  %}">
+        <br/>
+        <br/>
+        <div class="btn btn-primary">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="SA5HLK5C6BKQ2">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </div>
+        <a class="btn btn-primary btn-large" href="{% url 'home' %}">Go Back Home :((
+        <br/></a>
+
+
+    </header>
+
+
+{% endblock %}

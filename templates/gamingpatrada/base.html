@@ -1,0 +1,153 @@
+{% load staticfiles %}
+
+<!DOCTYPE html >
+<html  lang="en" >
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title_block%}{%endblock %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{%  static "gaming_patrada/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link href="{% static "gaming_patrada/css/shop-homepage.css"%}" rel="stylesheet">
+
+
+    <link href="{% static "gaming_patrada/vendor/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
+
+    <link rel="icon" type="image/png" href="{% static 'gaming_patrada/logos/icon_12678.png' %}" />
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<style type="text/css">
+   body {background: url('{% static 'gaming_patrada/backgroundimages/background.jpeg' %}') no-repeat center center fixed !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        background-size: cover !important;
+        -o-background-size: cover !important;
+   } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-static-top" href="{% url 'home' %}"><img src="{% static 'gaming_patrada/logos/patrada sidebar.jpg' %}"/></a>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right " style="font-family: 'Snap ITC';font-size: large">
+                    <li>
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'allgames' %}">Games</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'donate' %}">Donate</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<br/>
+    <br/>
+ <!-- Page Content -->
+    <div class="container" >
+        <div class="row">
+
+            <div class="col-md-3">
+                    <p class="lead" style="font-family: 'Berlin Sans FB';color: #fcfaff">The Gaming Patrada</p>
+                    <p class="lead" style="font-family: 'Berlin Sans FB';color: #fcfaff" >Game categories</p>
+                    <div class="list-group">
+                        {% block Category_block %}
+                        {% endblock %}
+                    </div>
+            </div>
+
+            <div class="col-md-9">
+                {% block page_content %}
+                {% endblock %}
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- footer-->
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/djangoproject?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://web.facebook.com/search/top/?q=Sidney+Wesonga&init=public">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/TheSnake10/TheGamingPatrada">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; The Gaming Patrada 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="{% static "gaming_patrada/js/jquery.js"%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{%  static "gaming_patrada/js/bootstrap.min.js"%}"></script>

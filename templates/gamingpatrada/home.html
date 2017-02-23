@@ -1,0 +1,73 @@
+{% extends "gamingpatrada/base.html" %}
+
+{% block title_block %}Gaming Patrada-Home{% endblock %}
+{% block Category_block %}
+    {% for category in categories %}
+        <a href="{% url 'category' category.slug %}" class="list-group-item" xmlns="http://www.w3.org/1999/html">{{ category.name }}</a>
+    {% endfor %}
+{% endblock %}
+
+
+
+
+        {% block page_content %}
+            <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+
+                                {% for slide in slideshow %}
+
+                                    {% if forloop.counter == 1 %}
+                                        <div class="item active">
+                                        {%else  %}
+                                            <div class="item">
+                                    {% endif %}
+                                 <a href="{% url 'gamedetail'  slide.category.slug slide.slug %}"><img href="" class="slide-image" src="{{ slide.cover_photo }}" alt=""></a>
+                                    </div>
+
+
+                                {% endfor %}
+
+
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+            </div>
+
+            <div class="row">
+                {% for game in all_games %}
+                <div class="wrapper">
+
+                    <div class="col-sm-4 col-lg-4 col-md-4 aligned">
+                        <div class="thumbnail">
+                            <img  style="width: 320px;height: 150px" src="{{ game.cover_photo }}" alt="">
+                            <div class="caption">
+                                <h4><a href="{% url 'gamedetail'  game.category.slug game.slug %}">{{ game.name }}</a>
+                                </h4>
+                                <P>Date Released:{{ game.released }}</P>
+                                <a class="btn btn-primary" href="{% url 'gamedetail' game.category.slug game.slug %}">Download</a>
+                                <a class="btn btn-primary aligned float-right" href="{% url 'review'  %}">Review</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        {% endblock %}

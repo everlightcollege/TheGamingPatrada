@@ -1,0 +1,67 @@
+{% extends 'gamingpatrada/base.html' %}
+{% block title_block %}Game Section{% endblock %}
+{% block Category_block %}
+    {% for category in categories %}
+        <a href="{% url 'category' category.slug %}" class="list-group-item">{{ category.name }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block page_content %}
+
+        <div style="color: #ffffff">
+                <div class="row">
+                    <div class="col-lg-12" style="font-family: 'Snap ITC';font-size: large">
+                        <h1 class="page-header">{{ game.name }}</h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <!-- Portfolio Item Row -->
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <img   src="{{ game.cover_photo }}" style="width: 100%;height: 100%" alt="">
+                    </div>
+
+                    <div class="col-md-4">
+                        <h3>Game Description</h3>
+                        {{ game.description|safe }}
+                        <h3>Game Requirements</h3>
+                        {{ game.requirements|safe }}
+
+                    </div><div class="col-md-4">
+                        <h3>Game Review</h3>
+                        <a class="btn btn-primary " href="{% url 'review'  %}">Review Game</a>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+                <!-- download links row -->
+                <div class="row" style="font-family: 'Snap ITC';font-size: large">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Download Links</h1>
+
+                        {{ game.download|safe }}
+
+                    </div>
+
+                </div>
+                <!-- Related Projects Row -->
+                <div class="row">
+
+                    <div class="col-lg-12" style="font-family: 'Snap ITC';font-size: large">
+                        <h3 class="page-header">Related Games</h3>
+                    </div>
+                {% for relgame in relatedgames %}
+
+                    <div class="col-sm-3 col-xs-6" >
+                        <a href="{% url 'gamedetail' relgame.category.slug relgame.slug %}">
+                            <img class="img-responsive portfolio-item" src="{{ relgame.cover_photo }} "style="width: 300px;height: 200px" alt="">
+                        </a>
+                    </div>
+
+                {% endfor %}
+
+                </div>
+        </div>
+{% endblock %}

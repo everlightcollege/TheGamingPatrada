@@ -1,0 +1,75 @@
+/*!
+ * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+
+   }
+
+.full {!important
+    background: url('/gaming_patrada/static/gaming_patrada/backgroundimages/maxresdefault.jpg') no-repeat center center fixed;!important;
+
+    background-color: #4cae4c;!important;;
+}
+
+.reset-img {
+    height: 320px;
+    width: 100px;
+
+}
+
+.slide-image {
+    width: 100%;
+}
+.game-pictures{
+    width: 320px;
+    height: 150px;
+}
+.link-font{
+    font-family: "Snap ITC", sans-serif;
+    font-size: 20px;
+    font-style: inherit;
+}
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
