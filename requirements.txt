@@ -50,3 +50,4 @@ traitlets==4.3.1
 Unidecode==0.4.20
 wcwidth==0.1.7
 win-unicode-console==0.5
+django-search==1.0

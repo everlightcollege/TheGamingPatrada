@@ -1,3 +1,6 @@
+import operator
+
+from django.db.models import Q
 from django.shortcuts import render
 from  gaming_patrada.models import *
 from django.shortcuts import redirect
@@ -13,8 +16,9 @@ def home(request):
     games = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:9]
     slideshow = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:3]
     categories = Category.objects.all
-    context = {'all_games': games, 'slideshow': slideshow, 'categories': categories}
+    gamesearch = Games.objects.all()
 
+    context = {'all_games': games, 'slideshow': slideshow, 'categories': categories, 'gamesearch': gamesearch}
     return render(request, template_name='gamingpatrada/home.html', context=context)
 
 
@@ -30,6 +34,8 @@ def category(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
         context['category_name'] = category.name
         games_list = Games.objects.filter(category=category).order_by('id').filter(id__range=[1,1000])
+        gamesearch = Games.objects.all()
+        context['gamesearch'] = gamesearch
         '''
         paginator = Paginator(games_list, 9)
         page = request.GET.get('page')
@@ -60,7 +66,9 @@ def gamedetail(request, category_name_slug, game_name_slug):
         game_category = Category.objects.get(slug=category_name_slug)
         related_games = Games.objects.filter(category=game.category).order_by('?')[:4]
         categories = Category.objects.all
+        gamesearch = Games.objects.all()
 
+        context['gamesearch'] = gamesearch
         context['relatedgames'] = related_games
         context['game'] = game
         context['categories'] = categories
@@ -76,7 +84,8 @@ def all_games(request):
     context = {}
     categories = Category.objects.all
     context['categories'] = categories
-
+    gamesearch = Games.objects.all()
+    context['gamesearch'] = gamesearch
     # paginator starts here
     ''''''
     allgames = Games.objects.all().order_by('id').filter(id__range=[1,1000])
@@ -100,6 +109,8 @@ def all_games(request):
 def review(request):
     context = {}
     categories = Category.objects.all
+    gamesearch = Games.objects.all()
+    context['gamesearch'] = gamesearch
     context['categories'] = categories
     return render(request, template_name='gamingpatrada/review.html', context=context)
 
@@ -107,5 +118,8 @@ def review(request):
 def donate(request):
     context = {}
     categories = Category.objects.all
+    gamesearch = Games.objects.all()
+    context['gamesearch'] = gamesearch
     context['categories'] = categories
     return render(request, template_name='gamingpatrada/Donate.html', context=context)
+
