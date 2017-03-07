@@ -12,6 +12,7 @@ from django.template.defaultfilters import slugify
 def addslugs():
     game_slug = Games.objects.all()
     for game in game_slug:
+        print ('adding slug to '+game.name)
         game.save()
 
 

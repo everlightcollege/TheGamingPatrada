@@ -1,10 +1,8 @@
-import operator
 
-from django.db.models import Q
 from django.shortcuts import render
-from  gaming_patrada.models import *
+from gaming_patrada.models import *
 from django.shortcuts import redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 # Create your views here.
@@ -13,8 +11,8 @@ def takehome(response):
 
 
 def home(request):
-    games = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:9]
-    slideshow = Games.objects.all().order_by('?').filter(id__range=[1,1000])[:3]
+    games = Games.objects.all().order_by('?')[:9]
+    slideshow = Games.objects.all().order_by('?')[:3]
     categories = Category.objects.all
     gamesearch = Games.objects.all()
 
@@ -33,23 +31,9 @@ def category(request, category_name_slug):
 
         category = Category.objects.get(slug=category_name_slug)
         context['category_name'] = category.name
-        games_list = Games.objects.filter(category=category).order_by('id').filter(id__range=[1,1000])
+        games_list = Games.objects.filter(category=category)
         gamesearch = Games.objects.all()
         context['gamesearch'] = gamesearch
-        '''
-        paginator = Paginator(games_list, 9)
-        page = request.GET.get('page')
-
-        try:
-            games = paginator.page(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            games = paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            games = paginator.page(paginator.num_pages)
-            '''
-
         context['games'] = games_list
         context['category'] = category
     except Category.DoesNotExist:
@@ -87,21 +71,9 @@ def all_games(request):
     gamesearch = Games.objects.all()
     context['gamesearch'] = gamesearch
     # paginator starts here
-    ''''''
-    allgames = Games.objects.all().order_by('id').filter(id__range=[1,1000])
-    '''
-    paginator = Paginator(allgames, 8)
-    page = request.GET.get('page')
 
-    try:
-        games = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        games = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        games = paginator.page(paginator.num_pages)
-    '''
+    allgames = Games.objects.all()
+
     context['games'] = allgames
     return render(request, template_name='gamingpatrada/games.html', context=context)
 

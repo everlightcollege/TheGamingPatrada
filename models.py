@@ -12,6 +12,7 @@ from django.db import models
 
 class Category(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
+    slug = models.CharField(max_length=50)
     name = models.CharField(max_length=20)
 
     class Meta:
@@ -20,13 +21,14 @@ class Category(models.Model):
 
 
 class Games(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
-    name = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    requirements = models.TextField(blank=True, null=True)
-    download = models.TextField(blank=True, null=True)
-    cover_photo = models.TextField(blank=True, null=True)
+    id = models.IntegerField(primary_key=True, blank=True, null=True)  # AutoField?
+    name = models.TextField(blank=True, null=True)  # This field type is a guess.
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', blank=True, null=True)
+    release = models.DateTimeField(blank=True, null=True)
+    cover_photo = models.CharField(blank=True, null=True)
+    description = models.CharField(blank=True, null=True)
+    requirements = models.CharField(blank=True, null=True)
+    download = models.CharField(blank=True, null=True)
 
     class Meta:
         managed = False
