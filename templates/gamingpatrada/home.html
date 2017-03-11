@@ -58,7 +58,6 @@
                             <div class="caption">
                                 <h4><a href="{% url 'gamedetail'  game.category.slug game.slug %}">{{ game.name }}</a>
                                 </h4>
-                                <P>Date Released:{{ game.released }}</P>
                                 <a class="btn btn-primary" href="{% url 'gamedetail' game.category.slug game.slug %}">Download</a>
                                 <a class="btn btn-primary aligned float-right" href="{% url 'review'  %}">Review</a>
                             </div>

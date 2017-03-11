@@ -1,21 +1,23 @@
 import os
+import django
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TheGamingPatrada.settings')
 
-import django
-
 django.setup()
 
-from gaming_patrada.models import Games, Category
+from gaming_patrada.models import *
 from django.template.defaultfilters import slugify
+from igdb.requester import Requester
+from igdb import Filter
+from igdb.operators import GTE, GT, EQ, EXISTS, PREFIX
 
-def addslugs():
+
+def add_slugs():
     game_slug = Games.objects.all()
     for game in game_slug:
-        print ('adding slug to '+game.name)
+        game.slug = slugify(game.name)
         game.save()
-
-
+        print('adding slug to ' + game.name)
 
 
 def remove_duplicate():
@@ -23,8 +25,32 @@ def remove_duplicate():
         if Games.objects.filter(cover_photo=row.cover_photo).count() > 1:
             row.delete()
 
-def refreshdb():
+
+def refresh_db():
     for row in Games.objects.all():
         row.refresh_from_db()
 
-addslugs()
+
+def add_letters():
+    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "V",
+               "W", "X", "Y", "Z"]
+    for letter in letters:
+        let = Letters(letters=letter)
+        let.save()
+
+        print('adding letter ' + '' + letter + ' ' + 'to letters')
+
+
+def igdb_get():
+    api_key = 'HpEHD4xuXPmshMfE99fmqesgjbJmp16vdTYjsn7tWoAYgKNbdI'
+    req = Requester(api_key)
+    game=Games.objects.get(id=200)
+    print('looking for '+game.name)
+    filter_slug = Filter(field='slug', operator=EQ, value=game.slug)
+    #filter_name = Filter(field='name', operator=EQ, value=game.name)
+
+    print(req.get_games(fields='name,slug,release_dates.human', limit=1, offset=0, order='release_dates.date:desc',
+                        filters=[filter_slug]))
+
+
+igdb_get()

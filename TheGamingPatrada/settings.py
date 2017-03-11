@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["archer254.pythonanywhere.com","127.0.0.1"]
 
-
+DATE_INPUT_FORMATS= ('%d-%m-%Y')
 # Application definition
 
 INSTALLED_APPS = [

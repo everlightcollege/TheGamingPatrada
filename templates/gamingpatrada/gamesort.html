@@ -1,0 +1,49 @@
+{% extends 'gamingpatrada/base.html' %}
+{% block title_block %}game alphabetical{% endblock %}
+
+
+{% block Category_block %}
+    {% for category in categories %}
+        <a href="{% url 'category' category.slug %}" class="list-group-item">{{ category.name }}</a>
+
+    {% endfor %}
+{% endblock %}
+
+{% block alphapagination %}
+    <!--pagination-->
+     <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    {% for letter in letters %}
+                    <li><a href="{% url 'gamesort' letter.letter %}"> {{ letter.letter }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+{% endblock %}
+
+
+
+{% block page_content %}
+
+    {% for game in allgames %}
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img style="width: 320px;height: 150px" src="{{ game.cover_photo }}" alt="">
+                            <div class="caption">
+                                <h4><a href="{% url 'gamedetail'  game.category.slug game.slug %}">{{ game.name }}</a>
+                                </h4>
+                                <a class="btn btn-primary" href="{% url 'gamedetail' game.category.slug game.slug %}">Download</a>
+                                <a class="btn btn-primary aligned" href="{% url 'review'  %}">Review</a>
+                            </div>
+
+                        </div>
+            </div>
+    {% endfor %}
+
+
+
+
+<!--pagination-->
+
+{% endblock %}

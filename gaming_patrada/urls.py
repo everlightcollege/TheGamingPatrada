@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^games/', views.all_games, name='allgames'),
     url(r'^review/', views.review, name='review'),
     url(r'^donate/', views.donate, name='donate'),
-
+    url(r'^sort/(?P<starts_with>[\w\-]+)/$', views.gamesort, name='gamesort')
 ]

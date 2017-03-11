@@ -1,8 +1,7 @@
-
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from gaming_patrada.models import *
 from django.shortcuts import redirect
-
+from alphapagainator import *
 
 
 # Create your views here.
@@ -32,8 +31,6 @@ def category(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
         context['category_name'] = category.name
         games_list = Games.objects.filter(category=category)
-        gamesearch = Games.objects.all()
-        context['gamesearch'] = gamesearch
         context['games'] = games_list
         context['category'] = category
     except Category.DoesNotExist:
@@ -64,20 +61,6 @@ def gamedetail(request, category_name_slug, game_name_slug):
     return render(request, template_name='gamingpatrada/gamedetails.html', context=context)
 
 
-def all_games(request):
-    context = {}
-    categories = Category.objects.all
-    context['categories'] = categories
-    gamesearch = Games.objects.all()
-    context['gamesearch'] = gamesearch
-    # paginator starts here
-
-    allgames = Games.objects.all()
-
-    context['games'] = allgames
-    return render(request, template_name='gamingpatrada/games.html', context=context)
-
-
 def review(request):
     context = {}
     categories = Category.objects.all
@@ -95,3 +78,28 @@ def donate(request):
     context['categories'] = categories
     return render(request, template_name='gamingpatrada/Donate.html', context=context)
 
+
+def all_games(request):
+    context = {}
+    categories = Category.objects.all
+    context['categories'] = categories
+    game = Games.objects.all().order_by('name')
+    letters = Letters.objects.all().order_by('letter')
+    context['letters'] = letters
+    context['allgames'] = game
+    return render(request, template_name='gamingpatrada/games.html', context=context)
+
+
+def gamesort(request, starts_with):
+    try:
+        context = {}
+        letters = Letters.objects.all().order_by('letter')
+        context['letters'] = letters
+        game = Games.objects.filter(name__istartswith=starts_with)
+        context['allgames'] = game
+        categories = Category.objects.all
+        context['categories'] = categories
+    except Games.DoesNotExist:
+        pass
+
+    return render(request, template_name='gamingpatrada/gamesort.html', context=context)

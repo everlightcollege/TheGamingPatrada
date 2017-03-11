@@ -2,7 +2,6 @@
 {% block title_block %}All Games{% endblock %}
 {% load el_pagination_tags %}
 
-
 {% block Category_block %}
     {% for category in categories %}
         <a href="{% url 'category' category.slug %}" class="list-group-item">{{ category.name }}</a>
@@ -10,20 +9,30 @@
     {% endfor %}
 {% endblock %}
 
+{% block alphapagination %}
+    <!--pagination-->
+     <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    {% for letter in letters %}
+                    <li><a href="{% url 'gamesort' letter.letter %}"> {{ letter.letter }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+{% endblock %}
 
 
 
 {% block page_content %}
-
-    {% paginate games %}
-    {% for game in games %}
+  {% paginate allgames %}
+    {% for game in allgames %}
             <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                             <img style="width: 320px;height: 150px" src="{{ game.cover_photo }}" alt="">
                             <div class="caption">
                                 <h4><a href="{% url 'gamedetail'  game.category.slug game.slug %}">{{ game.name }}</a>
                                 </h4>
-                                <P>Date Released:{{ game.released }}</P>
                                 <a class="btn btn-primary" href="{% url 'gamedetail' game.category.slug game.slug %}">Download</a>
                                 <a class="btn btn-primary aligned" href="{% url 'review'  %}">Review</a>
                             </div>
@@ -34,7 +43,7 @@
 
 
     <!--pagination-->
-    <div class="row text-center">
+     <div class="row text-center">
             <div class="col-lg-12">
                 <ul class="pagination">
                     <li>{% show_pages %}</li>
@@ -45,6 +54,7 @@
     {% get_pages %}
         Page {{ pages.current_start_index }}-{{ pages.current_end_index }} of {{ pages.total_count }}
     </div>
+
 <!--pagination-->
 
 {% endblock %}
