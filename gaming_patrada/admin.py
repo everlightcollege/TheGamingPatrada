@@ -5,7 +5,7 @@ from gaming_patrada.models import *
 #model views
 
 class PageAdmin(admin.ModelAdmin):
-    list_display = ['name','category']
+    list_display = ['name','category','release']
     prepopulated_fields = {'slug': ('name',)}
 
 class CategoryAdmin(admin.ModelAdmin):

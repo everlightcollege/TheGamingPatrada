@@ -30,13 +30,13 @@ class Games(models.Model):
     id = models.IntegerField(primary_key=True, blank=True, null=False)  # AutoField?
     name = models.TextField(blank=True, null=True, max_length=1000)  # This field type is a guess.
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', )
-    release = models.DateField(blank=True, null=True)
+    release = models.DateField(default='1800-5-5')
     cover_photo = models.CharField(blank=True, null=True, max_length=1000)
     description = models.CharField(blank=True, null=True, max_length=1000)
     requirements = models.CharField(blank=True, null=True, max_length=1000)
     download = models.CharField(blank=True, null=True, max_length=1000)
     slug = models.SlugField(default=1)
-    featured=models.BooleanField(default=False)
+    rating = models.DecimalField(decimal_places=5,max_digits=10)
     class Meta:
         managed = True
         db_table = 'Games'
